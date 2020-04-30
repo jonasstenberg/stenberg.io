@@ -1,0 +1,56 @@
+{
+  "name": "stenberg.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "hyperapp": "^1.2.5"
+  },
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "rm -rf .cache && rm -rf dist && parcel build index.html --no-autoinstall",
+    "standard": "standard",
+    "standard:fix": "standard --fix",
+    "stylelint": "stylelint styles/*",
+    "stylelint:fix": " stylelint styles/* --fix"
+  },
+  "standard": {
+    "ignore": [
+      "/dist/",
+      "/node_modules/"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "standard"
+    ],
+    "*.css": [
+      "stylelint styles/**/*.css"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonasstenberg/stenberg.io.git"
+  },
+  "author": "Jonas Stenberg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jonasstenberg/stenberg.io/issues"
+  },
+  "homepage": "https://github.com/jonasstenberg/stenberg.io#readme",
+  "devDependencies": {
+    "husky": "^4.2.3",
+    "lint-staged": "^10.1.1",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.3.1",
+    "parcel-plugin-stylelint-all": "^0.1.0",
+    "standard": "^14.3.3",
+    "stylelint-config-recess-order": "^2.0.4",
+    "stylelint-config-standard": "^20.0.0"
+  }
+}

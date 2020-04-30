@@ -1,0 +1,18 @@
+@import "./normalize.css";
+
+:root {
+  /* Colors - main */
+  --color-dark-blue: #2c3e50;
+  --color-cyan: #42b983;
+  --color-off-white: #e6ebe0;
+  --color-gray: #c1c1c1;
+  --color-dark-gray: #333;
+  --color-white: #fff;
+}
+
+@import "./fonts.css";
+@import "./defaults.css";
+
+.heading__social {
+  margin-top: 2.5rem;
+}
