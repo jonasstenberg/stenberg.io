@@ -1,13 +1,26 @@
-import { app } from 'hyperapp'
+import { app, h } from 'hyperapp'
 
-import state from './state'
-import actions from './actions'
+const state = {}
+const actions = {}
 
-import App from './components/App'
+const component = () => h('main', { class: 'main' },
+  h('div', { class: 'content' }, [
+    h('h1', {}, 'hello'),
+    h('p', {}, 'My name is Jonas.'),
+    h('p', {}, [
+      ' I\'m a developer at ',
+      h('a', { href: 'https://www.jayway.com/' }, 'Jayway'),
+      ' in Malmö, Sweden.'
+    ]),
+    h('ul', {}, [
+      h('li', {}, h('a', { href: 'https://github.com/jonasstenberg' }, 'github')),
+      h('li', {}, h('a', { href: 'https://www.linkedin.com/in/jonasstenberg/' }, 'linkedin'))
+    ])
+  ]))
 
 app(
   state,
   actions,
-  App,
-  document.getElementById('app')
+  component,
+  document.body
 )
