@@ -5,7 +5,7 @@ const actions = {}
 
 const component = () => h('main', { class: 'main' },
   h('div', { class: 'content' }, [
-    h('h1', {}, 'hello'),
+    h('h1', { class: 'title' }, 'hello'),
     h('p', {}, 'My name is Jonas.'),
     h('p', {}, [
       ' I\'m a developer at ',
