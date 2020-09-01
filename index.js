@@ -8,7 +8,7 @@ const component = () => h('main', { class: 'main' },
     h('h1', { class: 'title' }, 'hello'),
     h('p', {}, 'My name is Jonas.'),
     h('p', {}, [
-      ' I\'m a developer at ',
+      ' I\'m a tech lead and developer at ',
       h('a', { href: 'https://www.jayway.com/' }, 'Jayway'),
       ' in Malmö, Sweden.'
     ]),
