@@ -22,6 +22,7 @@
 .content {
   max-width: 26rem;
   padding: 1.5rem;
+  margin-bottom: 0;
 }
 
 @media (min-width: 208px) {
@@ -36,7 +37,7 @@
   }
 }
 
-@media (min-width: 384px) {
+@media (min-width: 416px) and (min-height: 480px) {
   .title {
     font-size: 7rem;
   }
@@ -47,5 +48,12 @@
 
   .content {
     padding: 2rem;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 416px) {
+  .content {
+    margin-bottom: 4rem;
   }
 }
