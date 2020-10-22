@@ -1,4 +1,10 @@
 @import "./normalize.css";
+
+:root {
+  --color-white: #fff;
+  --color-blue: #3498db;
+}
+
 @import "./fonts.css";
 @import "./defaults.css";
 
