@@ -9,7 +9,7 @@ const component = () => h('main', { class: 'main' },
     h('p', {}, 'My name is Jonas.'),
     h('p', {}, [
       ' I\'m a tech lead and developer at ',
-      h('a', { href: 'https://www.jayway.com/' }, 'Jayway'),
+      h('a', { href: 'https://www.halohq.io' }, 'Halo'),
       ' in Malmö, Sweden.'
     ]),
     h('ul', {}, [
