@@ -9,39 +9,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [10.x]
-
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Cache node modules
-      uses: actions/cache@v1
-      env:
-        cache-name: cache-node-modules
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
 
     - name: Install client dependencies
-      run: npm install
+      run: npm ci
 
     - name: Build client
       run: npm run build
 
-    - name: Copy to droplet
+    - name: Copy to server
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.DROPLET_KEY }}" > ~/.ssh/id_rsa
-        chmod 700 ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.DROPLET_HOST }} >> ~/.ssh/known_hosts
-        scp -o StrictHostKeyChecking=no -r ./dist/* ${{ secrets.DROPLET_USER }}@${{ secrets.DROPLET_HOST }}:/home/caddy-runner/stenberg.io
-        ssh -o StrictHostKeyChecking=no ${{ secrets.DROPLET_USER }}@${{ secrets.DROPLET_HOST }} 'sudo systemctl restart caddy'
-
+        echo "${{ secrets.HETZNER_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.HETZNER_SSH_HOST }} >> ~/.ssh/known_hosts
+        rsync --delete -azr ./dist/ ${{ secrets.HETZNER_SSH_USER }}@${{ secrets.HETZNER_SSH_HOST }}:/usr/local/bin/stenberg.io
+        ssh -o StrictHostKeyChecking=no ${{ secrets.HETZNER_SSH_USER }}@${{ secrets.HETZNER_SSH_HOST }} 'sudo systemctl restart caddy'
