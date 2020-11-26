@@ -23,6 +23,6 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.HETZNER_SSH_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.HETZNER_SSH_HOST }} >> ~/.ssh/known_hosts
-        rsync --delete -azr ./dist/ ${{ secrets.HETZNER_SSH_USER }}@${{ secrets.HETZNER_SSH_HOST }}:/usr/local/bin/stenberg.io
-        ssh -o StrictHostKeyChecking=no ${{ secrets.HETZNER_SSH_USER }}@${{ secrets.HETZNER_SSH_HOST }} 'sudo systemctl restart caddy'
+        ssh-keyscan -H stenberg.io >> ~/.ssh/known_hosts
+        rsync --delete -azr ./dist/ root@stenberg.io:/usr/local/bin/stenberg.io
+        ssh -o StrictHostKeyChecking=no root@stenberg.io 'sudo systemctl restart caddy'
