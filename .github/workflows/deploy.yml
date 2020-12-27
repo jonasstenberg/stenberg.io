@@ -18,11 +18,13 @@ jobs:
     - name: Build client
       run: npm run build
 
-    - name: Copy to server
+    - name: Deploy
+      env:
+        DOMAIN: stenberg.io
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.HETZNER_SSH_KEY }}" > ~/.ssh/id_rsa
+        echo "${{ secrets.APP_SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H stenberg.io >> ~/.ssh/known_hosts
-        rsync --delete -azr ./dist/ root@stenberg.io:/usr/local/bin/stenberg.io
-        ssh -o StrictHostKeyChecking=no root@stenberg.io 'sudo systemctl restart caddy'
+        ssh-keyscan -H $DOMAIN >> ~/.ssh/known_hosts
+        rsync --delete -azr ./dist/ root@$DOMAIN:/usr/local/bin/$DOMAIN
+        ssh -o StrictHostKeyChecking=no root@$DOMAIN 'sudo systemctl restart caddy'
